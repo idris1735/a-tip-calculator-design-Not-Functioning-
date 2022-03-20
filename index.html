@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Tip calculator app</title>
+  </head>
+  <style>
+    body {
+      background-color: #c5e4e7;
+      font-family: 'Space Mono', monospace;
+    }
+    .heading {
+      display: grid;
+      margin: 80px auto;
+      justify-content: center;
+    }
+    .heading-text {
+      color: #4b6f70;
+      font-size: 15px;
+      letter-spacing: 4px;
+      font-weight: 700;
+      margin: 0;
+    }
+    .container {
+      background-color: #ffffff;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 21.8rem;
+      width: 43.8rem;
+      border-radius: 16px;
+      box-shadow: 1px 1px 1px solid #fff;
+      margin: -30px auto;
+      align-items: center;
+      grid-template-areas: 'bill-calculator bill-calculation';
+    }
+    .bill-board {
+      height: 87%;
+      width: 93%;
+    }
+    .bill-calculator {
+      padding: 10px 10px;
+      grid-area: bill-calculator;
+    }
+    .bill-calculation {
+      background-color: #00474b;
+      border-radius: 10px;
+      grid-area: bill-calculation;
+    }
+    .bill {
+      margin-left: 1.5rem;
+      padding: 0;
+    }
+    .bill-text {
+      color: #889999;
+      font-size: 10px;
+      font-family: 'Space Mono', monospace;
+    }
+    .bill-input {
+      padding: 4px;
+      background-color: #f3f8fb;
+      border: none;
+      width: 80%;
+      border-radius: 5px;
+      margin-top: 3px;
+      outline: none;
+      text-align: right;
+      font-size: 20px;
+      font-weight: 700;
+      font-family: 'Space Mono';
+      color: #00474b;
+      padding-right: 10px;
+    }
+    .placeholder {
+      position: relative;
+    }
+    .placeholder::after {
+      position: absolute;
+      left: 5px;
+      top: 3px;
+      content: attr(data-placeholder);
+      pointer-events: none;
+      margin-top: 5px;
+      margin-left: 30px;
+      color: #b5c9ca;
+      text-align: left;
+      font-size: 17.5px;
+    }
+    .select-tip-text {
+      color: #858e8b;
+      letter-spacing: 1px;
+      margin-left: 1.5rem;
+    }
+    .tips-container {
+      width: 80%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      margin-left: 1.5rem;
+      grid-gap: 15px;
+      margin-top: -12.5px;
+    }
+    .tip-boxes {
+      width: 75px;
+      height: 30px;
+      background-color: #00474b;
+      border-radius: 4px;
+      padding: 3px;
+      text-align: center;
+      font-size: 17.5px;
+      color: #f3f8fb;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+    .box-three {
+      background-color: #26c2ad;
+    }
+    .box-six {
+      background-color: #f3f8fb;
+      letter-spacing: 1px;
+      color: #526f6b;
+      font-size: 17.5px;
+      font-family: 'Space Mono';
+    }
+    .people-text {
+      color: #858e8b;
+      margin-left: 1.5rem;
+      font-size: 12px;
+    }
+    .people-input {
+      padding: 4px;
+      background-color: #f3f8fb;
+      border: none;
+      width: 80%;
+      border-radius: 5px;
+      margin-top: -5px;
+      outline: none;
+      text-align: right;
+      font-size: 20px;
+      font-weight: 700;
+      font-family: 'Space Mono';
+      color: #00474b;
+      margin-left: 1.5rem;
+      padding-right: 10px;
+    }
+    .tip-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+    }
+    .tip-text {
+      color: #fff;
+      margin-left: 1.5rem;
+    }
+    .tip-amt {
+      font-size: 13px;
+    }
+    .tip-txt {
+      font-size: 10.5px;
+      color: #609599;
+      margin-top: -10px;
+    }
+    .price-tag {
+      font-size: 29px;
+      color: #26c2ad;
+      margin-right: 1.5rem;
+      align-items: center;
+      margin-top: 13px;
+    }
+    .tip-containers {
+      display: flex;
+      justify-content: space-between;
+    }
+    .tip-texts {
+      color: #fff;
+      margin-left: 1.5rem;
+    }
+    .tip-amts {
+      font-size: 13px;
+    }
+    .tip-txts {
+      font-size: 10.5px;
+      color: #609599;
+      margin-top: -10px;
+    }
+    .price-tags {
+      font-size: 29px;
+      color: #26c2ad;
+      margin-right: 1.5rem;
+      align-items: center;
+      margin-top: 13px;
+    }
+    .reset {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+    .reset-button {
+      width: 80%;
+      height: 32px;
+      background-color: #26c2ad;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      color: #00474b;
+      font-family: 'Space Mono';
+      cursor: pointer;
+    }
+    .rights-text {
+      color: #b5c9ca;
+      font-family: 'Space Mono';
+      font-size: 16px;
+      text-decoration: none;
+      text-align: center;
+      margin: auto;
+    }
+    .text-border {
+      border: 1px solid #00474b;
+      border-radius: 100%;
+      height: 100px;
+      width: 100px;
+      display: grid;
+      background-color: #00474b;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        display: grid;
+        margin: auto;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+          'bill-calculator'
+          'bill-calculation';
+        height: 680px;
+        width: 340px;
+      }
+      .heading {
+        display: grid;
+        margin: 80px auto;
+        justify-content: center;
+      }
+      .bill-calculator {
+        padding: 10px 10px;
+        grid-area: bill-calculator;
+      }
+      .bill-calculation {
+        background-color: #00474b;
+        border-radius: 10px;
+        grid-area: bill-calculation;
+        margin-left: 2rem;
+        padding: 0 10px;
+      }
+      .bill-input {
+        padding: 4px;
+        background-color: #f3f8fb;
+        border: none;
+        width: 100%;
+        border-radius: 5px;
+        margin-top: 3px;
+        outline: none;
+        text-align: right;
+        font-size: 20px;
+        font-weight: 700;
+        font-family: 'Space Mono';
+        color: #00474b;
+        padding-right: 10px;
+      }
+      .tips-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        margin-left: 1.5rem;
+        grid-gap: 15px;
+        margin-top: -12.5px;
+      }
+      .tip-boxes {
+        width: 100%;
+        height: 30px;
+        background-color: #00474b;
+        border-radius: 4px;
+        padding: 3px;
+        text-align: center;
+        font-size: 17.5px;
+        color: #f3f8fb;
+        letter-spacing: 2px;
+        cursor: pointer;
+      }
+      .box-three {
+        background-color: #26c2ad;
+      }
+      .box-six {
+        background-color: #f3f8fb;
+        letter-spacing: 1px;
+        color: #526f6b;
+        font-size: 17.5px;
+        font-family: 'Space Mono';
+      }
+      .people-text {
+        color: #858e8b;
+        margin-left: 1.5rem;
+        font-size: 12px;
+      }
+      .tip-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1.5rem;
+      }
+      .reset {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+      }
+      .reset-button {
+        width: 80%;
+        height: 32px;
+        background-color: #26c2ad;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #00474b;
+        font-family: 'Space Mono';
+        cursor: pointer;
+        margin-top: -50px;
+      }
+      .people-input {
+        padding: 4px;
+        background-color: #f3f8fb;
+        border: none;
+        width: 100%;
+        border-radius: 5px;
+        margin-top: -5px;
+        outline: none;
+        text-align: right;
+        font-size: 20px;
+        font-weight: 700;
+        font-family: 'Space Mono';
+        color: #00474b;
+        margin-left: 1.5rem;
+        padding-right: 10px;
+      }
+    }
+  </style>
+  <!-- ::placeholder {
+      color: #768b8c;
+      text-align: left;
+      position: absolute;
+    } -->
+  <body>
+    <div class="heading">
+      <h4 class="heading-text">SPLI</h4>
+      <h4 class="heading-text">TTER</h4>
+    </div>
+    <div class="container">
+      <!-- first side start -->
+      <div class="bill-calculator bill-board">
+        <div>
+          <label class="bill-text bill"><strong>BILL</strong></label>
+        </div>
+        <div class="placeholder" data-placeholder="$">
+          <input type="text" value="142.55" class="bill-input bill" />
+        </div>
+        <br />
+        <div>
+          <h6 class="select-tip-text">Select Tip %</h6>
+        </div>
+        <div class="tips-container">
+          <div class="tip-boxes box-one">5%</div>
+          <div class="tip-boxes box-two">10%</div>
+          <div class="tip-boxes box-three">15%</div>
+          <div class="tip-boxes box-four">25%</div>
+          <div class="tip-boxes box-five">50%</div>
+          <div class="tip-boxes box-six"><strong>Custom</strong></div>
+        </div>
+        <div>
+          <p class="people-text"><strong>Number of people</strong></p>
+          <input class="people-input" value="5" type="text" />
+        </div>
+      </div>
+      <!-- first side end -->
+      <div class="bill-calculation bill-board">
+        <!-- first tip container -->
+        <div class="tip-container">
+          <div class="tip-amount">
+            <p class="tip-text tip-amt"><strong>Tip Amount</strong></p>
+            <p class="tip-text tip-txt"><strong>/ person</strong></p>
+          </div>
+          <div class="tag-container">
+            <p class="price-tag"><strong>$4.27</strong></p>
+          </div>
+        </div>
+        <!-- second tip container -->
+        <div class="tip-containers">
+          <div class="tip-amounts">
+            <p class="tip-texts tip-amts"><strong>Total</strong></p>
+            <p class="tip-texts tip-txts"><strong>/ person</strong></p>
+          </div>
+          <div class="tag-containers">
+            <p class="price-tags"><strong>$32.79</strong></p>
+          </div>
+        </div>
+        <!-- Reset Button -->
+        <div class="reset">
+          <input type="submit" value="RESET" class="reset-button" />
+        </div>
+      </div>
+    </div>
+    <footer class="my-rights">
+      <div class="text-border">
+        <a href="#" class="rights-text"><strong> Made by Idris</strong> </a>
+      </div>
+    </footer>
+  </body>
+</html>
